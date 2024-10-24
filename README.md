@@ -10,4 +10,4 @@ Das **alertingJob** Skript wurde während meiner Zeit bei der ITD/OE Versetzungs
 
 ### SensorCar-GUI
 
-Das **SensorCar-GUI** Projekt entstand im ersten Lehrjahr während meiner Berufsschulausbildung. Dieses Projekt beinhaltete die Entwicklung einer grafischen Benutzeroberfläche für ein sensorbasiertes Auto.
+Das **SensoCar-GUI** Projekt entstand im ersten Lehrjahr während meiner Berufsschulausbildung. Dieses Projekt beinhaltete die Entwicklung einer grafischen Benutzeroberfläche für ein sensorbasiertes Auto.
