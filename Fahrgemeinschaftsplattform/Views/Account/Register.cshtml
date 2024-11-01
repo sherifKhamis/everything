@@ -1,0 +1,102 @@
+﻿@model Fahrgemeinschaftsplattform.Models.RegisterViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrierung - Die Fahrgemeinschaftsplattform</title>
+    <style>
+        /* Allgemeine Stile */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            min-height: 100vh;
+            margin: 50px;
+            background-color: black;
+            color: white;
+        }
+
+        /* Register-Container */
+        .register-container {
+            background-color: #9f9f9f;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            position: center;
+        }
+
+        .register-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .register-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .register-container button {
+            background-color: #0078D6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-container button:hover {
+            background-color: #008DFC;
+        }
+            
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h1>Registrieren</h1>
+        <form asp-action="Register" method="post">
+            <div>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="text" />
+            </div>
+            <div>
+                <label asp-for="Password">Passwort</label>
+                <input asp-for="Password" type="password" />
+            </div>
+            <div>
+                <label asp-for="ConfirmPassword">Passwort bestätigen</label>
+                <input asp-for="ConfirmPassword" type="password" />
+            </div>
+            <button type="submit">Registrieren</button>
+        </form>
+    </div>
+</body>
+</html>

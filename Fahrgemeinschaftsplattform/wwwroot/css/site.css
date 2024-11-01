@@ -8,6 +8,7 @@
 
 body {
     background-color: black;
+    padding-top: 180px;
 }
 
 /* Navigation */
@@ -15,12 +16,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: 20px 50px; 
     background-color: black;
     color: white;
-    position: relative;
-    margin-bottom: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Stellt sicher, dass die Navbar über anderen Elementen liegt */
 }
+
 
 .navbar-center {
     position: absolute;
@@ -58,4 +63,16 @@ body {
 
 .btn:hover {
     background-color: #008DFC;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #9f9f9f;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
 }
