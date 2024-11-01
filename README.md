@@ -10,4 +10,8 @@ Das **alertingJob** Skript wurde während meiner Zeit bei der ITD/OE Versetzungs
 
 ### SensorCar-GUI
 
-Das **SensoCar-GUI** Projekt entstand im ersten Lehrjahr während meiner Berufsschulausbildung. Dieses Projekt beinhaltete die Entwicklung einer grafischen Benutzeroberfläche für ein sensorbasiertes Auto.
+Das **SensorCar-GUI** Projekt entstand im ersten Lehrjahr während meiner Berufsschulausbildung. Dieses Projekt beinhaltete die Entwicklung einer grafischen Benutzeroberfläche für ein sensorbasiertes Auto.
+
+### Fahrgemeinschaftsplattform (C# und ASP.NET Core)
+
+Die **Fahrgemeinschaftsplattform** wurde als Teil meines Informatik-Bachelor-Moduls *Agile Software Engineering* entwickelt. Dieses Projekt nutzt C# und das ASP.NET Core Framework zusammen mit Entity Framework Core und Identity zur Daten- und Benutzerverwaltung. Die Plattform zielt darauf ab, eine sichere und benutzerfreundliche Lösung für die Organisation von Fahrgemeinschaften zu bieten und demonstriert die Anwendung agiler Softwareentwicklungsmethoden.
