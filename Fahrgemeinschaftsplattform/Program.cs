@@ -21,6 +21,7 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 app.UsePathBase("/myapp");
+app.UseStaticFiles();
 
 // Reihenfolge der Middleware-Aufrufe festlegen
 app.UseRouting(); // Muss vor UseAuthentication, UseAuthorization und UseEndpoints stehen

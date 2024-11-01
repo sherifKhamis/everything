@@ -137,9 +137,7 @@ C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\o
 C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Fahrgemeinschaftsplattform.props
 C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Fahrgemeinschaftsplattform.props
 C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\scopedcss\bundle\Fahrgemeinschaftsplattform.styles.css
-C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\scopedcss\projectbundle\Fahrgemeinschaftsplattform.bundle.scp.css
 C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\Fahrgeme.7A86049A.Up2Date
 C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\Fahrgemeinschaftsplattform.dll
 C:\Users\Sheri\source\repos\sherifKhamis\everything\Fahrgemeinschaftsplattform\obj\Debug\net8.0\refint\Fahrgemeinschaftsplattform.dll

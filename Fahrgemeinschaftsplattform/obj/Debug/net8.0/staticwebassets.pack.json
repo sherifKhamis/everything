@@ -1,16 +1,20 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Fahrgemeinschaftsplattform.bundle.scp.css",
-      "PackagePath": "staticwebassets\\Fahrgemeinschaftsplattform.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\wwwroot\\images\\mercedes-benz-on-phone.png",
+      "PackagePath": "staticwebassets\\images\\mercedes-benz-on-phone.png"
+    },
+    {
+      "Id": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\wwwroot\\images\\mercedes_benz_ag_logo.jpeg",
+      "PackagePath": "staticwebassets\\images\\mercedes_benz_ag_logo.jpeg"
     },
     {
       "Id": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\wwwroot\\js\\site.js",
