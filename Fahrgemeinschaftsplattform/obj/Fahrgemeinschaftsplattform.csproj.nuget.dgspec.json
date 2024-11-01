@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sheri\\source\\repos\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj": {}
+    "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sheri\\source\\repos\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj": {
+    "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sheri\\source\\repos\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj",
+        "projectUniqueName": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj",
         "projectName": "Fahrgemeinschaftsplattform",
-        "projectPath": "C:\\Users\\Sheri\\source\\repos\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj",
+        "projectPath": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\Fahrgemeinschaftsplattform.csproj",
         "packagesPath": "C:\\Users\\Sheri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sheri\\source\\repos\\Fahrgemeinschaftsplattform\\obj\\",
+        "outputPath": "C:\\Users\\Sheri\\source\\repos\\sherifKhamis\\everything\\Fahrgemeinschaftsplattform\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sheri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,26 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
