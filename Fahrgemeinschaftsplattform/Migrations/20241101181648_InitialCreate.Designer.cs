@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fahrgemeinschaftsplattform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241101110657_InitialCreate")]
+    [Migration("20241101181648_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

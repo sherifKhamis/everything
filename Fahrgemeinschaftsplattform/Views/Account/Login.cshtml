@@ -4,7 +4,7 @@
     Layout = "_Layout";
 }
 
-<div class="login-container">
+<<div class="login-container">
     <h1>Willkommen zurück</h1>
     <form asp-action="Login" method="post">
         <div>
@@ -15,9 +15,16 @@
             <label asp-for="Password">Passwort</label>
             <input asp-for="Password" type="password" />
         </div>
+        <div>
+            <label>
+                <input asp-for="RememberMe" type="checkbox" />
+                Angemeldet bleiben
+            </label>
+        </div>
         <button type="submit">Login</button>
     </form>
 </div>
+
 <style>
  /* Allgemeine Stile */
         * {
@@ -84,4 +91,4 @@
         .login-container button:hover {
             background-color: #008DFC;
         }
-    </style>
+</style>

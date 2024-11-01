@@ -71,6 +71,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-bottom: 50px;
         }
 
         .register-container button:hover {
@@ -96,6 +97,8 @@
                 <input asp-for="ConfirmPassword" type="password" />
             </div>
             <button type="submit">Registrieren</button>
+
+            <p class="password-requirements">Das Passwort muss mindestens 4 Zeichen lang sein.</p>
         </form>
     </div>
 </body>
