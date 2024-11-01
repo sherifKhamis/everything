@@ -4,29 +4,14 @@
     Layout = "_Layout";
 }
 
-<<div class="login-container">
-    <h1>Willkommen zurück</h1>
-    <form asp-action="Login" method="post">
-        <div>
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" type="text" />
-        </div>
-        <div>
-            <label asp-for="Password">Passwort</label>
-            <input asp-for="Password" type="password" />
-        </div>
-        <div>
-            <label>
-                <input asp-for="RememberMe" type="checkbox" />
-                Angemeldet bleiben
-            </label>
-        </div>
-        <button type="submit">Login</button>
-    </form>
-</div>
-
-<style>
- /* Allgemeine Stile */
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Die Fahrgemeinschaftsplattform</title>
+    <style>
+        /* Allgemeine Stile */
         * {
             margin: 0;
             padding: 0;
@@ -37,14 +22,14 @@
         body {
             display: flex;
             justify-content: center;
-            align-content: center;
+            align-items: flex-start;
             min-height: 100vh;
-            margin: 50px;
             background-color: black;
             color: white;
+            padding-top: 200px;
         }
 
-        /* Register-Container */
+        /* Login-Container */
         .login-container {
             background-color: #9f9f9f;
             padding: 40px;
@@ -52,7 +37,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 300px;
             text-align: center;
-            position: center;
+            margin-top: 20px;
         }
 
         .login-container h1 {
@@ -86,9 +71,51 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-bottom: 20px;
         }
 
         .login-container button:hover {
             background-color: #008DFC;
         }
-</style>
+
+        .alert-error {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <div class="alert-error">
+                @ViewData["ErrorMessage"]
+            </div>
+        }
+        
+        <h1>Login</h1>
+        <form asp-action="Login" method="post">
+            <div>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="text" />
+            </div>
+            <div>
+                <label asp-for="Password">Passwort</label>
+                <input asp-for="Password" type="password" />
+            </div>
+            <div>
+                <label>
+                    <input asp-for="RememberMe" type="checkbox" />
+                    Angemeldet bleiben
+                </label>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

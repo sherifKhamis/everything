@@ -22,11 +22,11 @@
         body {
             display: flex;
             justify-content: center;
-            align-content: center;
+            align-items: flex-start;
             min-height: 100vh;
-            margin: 50px;
             background-color: black;
             color: white;
+            padding-top: 200px;
         }
 
         /* Register-Container */
@@ -37,51 +37,85 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 300px;
             text-align: center;
-            position: center;
+            margin-top: 20px;
         }
 
-        .register-container h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+            .register-container h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
 
-        .register-container label {
-            display: block;
-            text-align: left;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
+            .register-container label {
+                display: block;
+                text-align: left;
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
 
-        .register-container input[type="text"],
-        .register-container input[type="password"] {
-            width: 100%;
+            .register-container input[type="text"],
+            .register-container input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: none;
+                border-radius: 4px;
+                font-size: 14px;
+            }
+
+            .register-container button {
+                background-color: #0078D6;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                margin-bottom: 20px;
+            }
+
+                .register-container button:hover {
+                    background-color: #008DFC;
+                }
+
+        .alert-success, .alert-error {
             padding: 10px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .register-container button {
-            background-color: #0078D6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
             border-radius: 5px;
+            margin-bottom: 20px;
             font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-bottom: 50px;
+            text-align: center;
+            color: white;
         }
 
-        .register-container button:hover {
-            background-color: #008DFC;
+        .alert-success {
+            background-color: #28a745;
         }
-            
+
+        .alert-error {
+            background-color: #dc3545;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
     <div class="register-container">
+        @if (ViewData["SuccessMessage"] != null)
+        {
+            <div class="alert-success">
+                @ViewData["SuccessMessage"]
+            </div>
+        }
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <div class="alert-error">
+                @ViewData["ErrorMessage"]
+            </div>
+        }
+
         <h1>Registrieren</h1>
         <form asp-action="Register" method="post">
             <div>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fahrgemeinschaftsplattform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+439c8d72301dcfc134e891f6f537d7019e2b980c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70703283b91097ed2ea8d2c384ddb67a3c1b3665")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fahrgemeinschaftsplattform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fahrgemeinschaftsplattform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

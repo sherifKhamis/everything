@@ -29,10 +29,13 @@ namespace Fahrgemeinschaftsplattform.Controllers
 
                 if (result.Succeeded)
                 {
+                    ViewData["SuccessMessage"] = "Die Registrierung war erfolgreich. Willkommen!";
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return View();
                 }
 
+                // Fehlermeldungen anzeigen, falls die Registrierung fehlschlägt
+                ViewData["ErrorMessage"] = "Registrierung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.";
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -40,6 +43,8 @@ namespace Fahrgemeinschaftsplattform.Controllers
             }
             return View(model);
         }
+
+
 
         [HttpGet]
         public IActionResult Login() => View();
@@ -56,10 +61,13 @@ namespace Fahrgemeinschaftsplattform.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                // Fehlermeldung setzen, wenn der Login fehlschlägt
+                ViewData["ErrorMessage"] = "Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.";
             }
+
             return View(model);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
