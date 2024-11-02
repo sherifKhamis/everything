@@ -1,59 +1,69 @@
 ﻿@model Fahrgemeinschaftsplattform.Models.Route
 
 @{
-    Layout = "_Layout";
+    Layout = "_Layout"; // Legt das Layout der Seite fest
 }
 
-<h2 style="text-align: center; margin-top: 20px; color: #333;">Neue Fahrt erstellen</h2>
+<h2 style="text-align: center; margin-top: 20px; color: white;">Neue Fahrt erstellen</h2> <!-- Überschrift der Seite -->
 
 <div class="create-route-container">
     <div class="route-card">
-        <!-- Anzeige der Fehlermeldung -->
+        <!-- Anzeige der Fehlermeldung, falls das Model ungültig ist -->
         @if (!ViewData.ModelState.IsValid)
         {
             <div class="alert alert-danger">
                 <strong>Fehler:</strong>
-                <div asp-validation-summary="All"></div>
+                <div asp-validation-summary="All"></div> <!-- Zusammenfassung aller Validierungsfehler -->
             </div>
         }
 
+        <!-- Formular zur Erstellung einer neuen Fahrt -->
         <form asp-action="Create" method="post">
-            <!-- Fahrer -->
+            <!-- Fahrername-Eingabefeld -->
             <div class="form-group">
-                <label for="FahrerName">Fahrer</label>
-                <input type="text" class="form-control" id="FahrerName" name="FahrerName" required>
+                <label asp-for="FahrerName">Fahrer</label>
+                <input asp-for="FahrerName" class="form-control" required />
+                <span asp-validation-for="FahrerName" class="text-danger"></span>
             </div>
 
-            <!-- Startort Koordinaten -->
+            <!-- Startort Koordinaten (Latitude und Longitude) -->
             <div class="form-group">
-                <label for="StartLatitude">Start Latitude</label>
-                <input type="text" class="form-control" id="StartLatitude" name="StartLatitude" required>
+                <label asp-for="StartLatitude">Start Latitude</label>
+                <input asp-for="StartLatitude" class="form-control" required />
+                <span asp-validation-for="StartLatitude" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="StartLongitude">Start Longitude</label>
-                <input type="text" class="form-control" id="StartLongitude" name="StartLongitude" required>
+                <label asp-for="StartLongitude">Start Longitude</label>
+                <input asp-for="StartLongitude" class="form-control" required />
+                <span asp-validation-for="StartLongitude" class="text-danger"></span>
             </div>
 
-            <!-- Zielort Koordinaten -->
+            <!-- Zielort Koordinaten (Latitude und Longitude) -->
             <div class="form-group">
-                <label for="EndLatitude">End Latitude</label>
-                <input type="text" class="form-control" id="EndLatitude" name="EndLatitude" required>
+                <label asp-for="EndLatitude">End Latitude</label>
+                <input asp-for="EndLatitude" class="form-control" required />
+                <span asp-validation-for="EndLatitude" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="EndLongitude">End Longitude</label>
-                <input type="text" class="form-control" id="EndLongitude" name="EndLongitude" required>
+                <label asp-for="EndLongitude">End Longitude</label>
+                <input asp-for="EndLongitude" class="form-control" required />
+                <span asp-validation-for="EndLongitude" class="text-danger"></span>
             </div>
 
             <!-- Abfahrtszeit und verfügbare Plätze -->
             <div class="form-group">
-                <label for="Abfahrtszeit">Abfahrtszeit</label>
-                <input type="datetime-local" class="form-control" id="Abfahrtszeit" name="Abfahrtszeit" required>
+                <label asp-for="Abfahrtszeit">Abfahrtszeit</label>
+                <input asp-for="Abfahrtszeit" type="datetime-local" class="form-control" required />
+                <span asp-validation-for="Abfahrtszeit" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="VerfuegbareSitze">Verfügbare Plätze</label>
-                <input type="number" class="form-control" id="VerfuegbareSitze" name="VerfuegbareSitze" min="1" required>
+                <label asp-for="VerfuegbareSitze">Verfügbare Plätze</label>
+                <input asp-for="VerfuegbareSitze" type="number" min="1" class="form-control" required />
+                <span asp-validation-for="VerfuegbareSitze" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn">Fahrt erstellen</button>
+
+            <!-- Button zum Absenden des Formulars -->
+            <button type="submit" class="btn action-btn">Fahrt erstellen</button>
         </form>
     </div>
 </div>

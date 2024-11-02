@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Fahrgemeinschaftsplattform.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class StartUp : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -198,7 +198,7 @@ namespace Fahrgemeinschaftsplattform.Migrations
                     Abfahrtszeit = table.Column<DateTime>(type: "datetime2", nullable: false),
                     VerfuegbareSitze = table.Column<int>(type: "int", nullable: false),
                     FahrerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FahrerId = table.Column<int>(type: "int", nullable: false)
+                    FahrerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -207,8 +207,7 @@ namespace Fahrgemeinschaftsplattform.Migrations
                         name: "FK_Routen_Fahrer_FahrerId",
                         column: x => x.FahrerId,
                         principalTable: "Fahrer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -223,7 +222,7 @@ namespace Fahrgemeinschaftsplattform.Migrations
                     EndLongitude = table.Column<double>(type: "float", nullable: false),
                     GewuenschteAbfahrtszeit = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MitfahrerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MitfahrerId = table.Column<int>(type: "int", nullable: false)
+                    MitfahrerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,8 +231,7 @@ namespace Fahrgemeinschaftsplattform.Migrations
                         name: "FK_Anfragen_Mitfahrer_MitfahrerId",
                         column: x => x.MitfahrerId,
                         principalTable: "Mitfahrer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

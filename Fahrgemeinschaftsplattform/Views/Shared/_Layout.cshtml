@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    Layout = null; // Setzt das Layout auf null, um sicherzustellen, dass dies das Hauptlayout ist
 }
 
 <!DOCTYPE html>
@@ -7,35 +7,37 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Die Fahrgemeinschaftsplattform</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"] - Die Fahrgemeinschaftsplattform</title> <!-- Dynamischer Titel der Seite -->
+    <link rel="stylesheet" href="~/css/site.css" /> <!-- Link zur externen CSS-Datei -->
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <!-- Zentriertes Logo -->
+            <!-- Zentriertes Logo in der Navigation -->
             <div class="navbar-center">
-                <img src="~/images/mercedes_benz_ag_logo.jpeg" alt="Logo" class="navbar-logo" />
+                <img src="~/images/mercedes_benz_ag_logo.jpeg" alt="Logo" class="navbar-logo" /> <!-- Logo der Plattform -->
             </div>
             <ul class="nav-links">
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> <!-- Link zur Startseite -->
             </ul>
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="container">
-        @RenderBody()
+        @RenderBody() <!-- Platzhalter für den Hauptinhalt der Seite -->
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Die Fahrgemeinschaftsplattform. Alle Rechte vorbehalten.</p>
+        <p>&copy; 2024 Die Fahrgemeinschaftsplattform. Alle Rechte vorbehalten.</p> <!-- Copyright-Text -->
     </footer>
 
+    <!-- jQuery-Validierungsbibliotheken für Formularüberprüfungen -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
-    @RenderSection("Scripts", required: false)
+
+    @RenderSection("Scripts", required: false) <!-- Platzhalter für zusätzliche Skripte, falls benötigt -->
 </body>
 </html>

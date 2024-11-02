@@ -1,30 +1,31 @@
 ﻿@model IEnumerable<Fahrgemeinschaftsplattform.Models.Route>
 
 @{
-    Layout = "_Layout";
+    Layout = "_Layout"; // Legt das Layout der Seite fest
 }
 
-<h2 style="text-align: center; margin-top: 20px; color: #333;">Passende Fahrten</h2>
-
+<h2 style="text-align: center; margin-top: 20px; color: #333;">Passende Fahrten</h2> <!-- Überschrift der Seite -->
+<!-- Überprüfung, ob das Model Fahrten enthält -->
 @if (Model.Any())
 {
     <div class="routes-container">
+        <!-- Schleife durch alle passenden Fahrten und zeigt sie als Karten an -->
         @foreach (var route in Model)
         {
             <div class="route-card">
-                <h3>Fahrt von Start zu Ziel</h3>
-                <p><strong>Fahrername:</strong> @route.FahrerName</p>
-                <p><strong>Start Koordinaten:</strong> @route.StartLatitude, @route.StartLongitude</p>
-                <p><strong>Ziel Koordinaten:</strong> @route.EndLatitude, @route.EndLongitude</p>
-                <p><strong>Abfahrtszeit:</strong> @route.Abfahrtszeit.ToString("dd.MM.yyyy HH:mm")</p>
-                <p><strong>Verfügbare Plätze:</strong> @route.VerfuegbareSitze</p>
-                
+                <h3>Fahrt von Start zu Ziel</h3> <!-- Titel der Fahrt -->
+                <p><strong>Fahrername:</strong> @route.FahrerName</p> <!-- Fahrername anzeigen -->
+                <p><strong>Start Koordinaten:</strong> @route.StartLatitude, @route.StartLongitude</p> <!-- Startkoordinaten anzeigen -->
+                <p><strong>Ziel Koordinaten:</strong> @route.EndLatitude, @route.EndLongitude</p> <!-- Zielkoordinaten anzeigen -->
+                <p><strong>Abfahrtszeit:</strong> @route.Abfahrtszeit.ToString("dd.MM.yyyy HH:mm")</p> <!-- Formatierte Abfahrtszeit anzeigen -->
+                <p><strong>Verfügbare Plätze:</strong> @route.VerfuegbareSitze</p> <!-- Verfügbare Sitzplätze anzeigen -->
             </div>
         }
     </div>
 }
 else
 {
+    <!-- Nachricht anzeigen, wenn keine passenden Fahrten gefunden wurden -->
     <p style="text-align: center; color: #777; margin-top: 20px;">Keine passenden Fahrten gefunden.</p>
 }
 
@@ -32,46 +33,46 @@ else
     /* Container für die Fahrtenübersicht */
     .routes-container {
         display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-        padding: 20px;
+        flex-wrap: wrap; /* Zeilenumbruch bei Platzmangel */
+        gap: 20px; /* Abstand zwischen den Karten */
+        justify-content: center; /* Zentriert die Karten */
+        padding: 20px; /* Innenabstand */
     }
 
     .route-card {
-        background-color: #9f9f9f;
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        width: 300px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        background-color: #9f9f9f; /* Hintergrundfarbe der Karte */
+        color: white; /* Textfarbe */
+        padding: 20px; /* Innenabstand */
+        border-radius: 8px; /* Runde Ecken */
+        width: 300px; /* Breite der Karte */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatteneffekt */
+        text-align: center; /* Textzentrierung */
     }
 
-    .route-card h3 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
+        .route-card h3 {
+            font-size: 24px; /* Schriftgröße des Titels */
+            margin-bottom: 10px; /* Abstand nach unten */
+        }
 
-    .route-card p {
-        font-size: 16px;
-        margin: 5px 0;
-    }
+        .route-card p {
+            font-size: 16px; /* Schriftgröße des Textes */
+            margin: 5px 0; /* Abstand zwischen den Absätzen */
+        }
 
     .btn {
         display: inline-block;
-        padding: 10px 20px;
-        margin-top: 10px;
-        font-size: 16px;
-        text-decoration: none;
-        color: white;
-        background-color: #007bff;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-        cursor: pointer;
+        padding: 10px 20px; /* Innenabstand */
+        margin-top: 10px; /* Abstand nach oben */
+        font-size: 16px; /* Schriftgröße */
+        text-decoration: none; /* Entfernt Unterstreichung */
+        color: white; /* Textfarbe */
+        background-color: #007bff; /* Hintergrundfarbe */
+        border-radius: 5px; /* Runde Ecken */
+        transition: background-color 0.3s; /* Übergangseffekt für Hintergrundfarbe */
+        cursor: pointer; /* Zeigt Hand-Cursor an */
     }
 
-    .btn:hover {
-        background-color: #0056b3;
-    }
+        .btn:hover {
+            background-color: #0056b3; /* Ändert die Hintergrundfarbe bei Hover */
+        }
 </style>

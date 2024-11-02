@@ -1,7 +1,7 @@
 ﻿@model Fahrgemeinschaftsplattform.Models.LoginViewModel
 
 @{
-    Layout = "_Layout";
+    Layout = "_Layout"; // Legt das Layout für die Seite fest
 }
 
 <!DOCTYPE html>
@@ -13,108 +13,110 @@
     <style>
         /* Allgemeine Stile */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            margin: 0; /* Entfernt Standardabstände */
+            padding: 0; /* Entfernt Standardinnenabstände */
+            box-sizing: border-box; /* Inkludiert padding und border in Breite und Höhe */
+            font-family: Arial, sans-serif; /* Schriftart auf Arial setzen */
         }
 
         body {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            background-color: black;
-            color: white;
-            padding-top: 200px;
+            justify-content: center; /* Zentriert den Inhalt horizontal */
+            align-items: flex-start; /* Positioniert den Inhalt oben */
+            min-height: 100vh; /* Setzt die minimale Höhe auf die gesamte Bildschirmhöhe */
+            background-color: black; /* Hintergrundfarbe auf Schwarz setzen */
+            color: white; /* Textfarbe auf Weiß setzen */
+            padding-top: 200px; /* Abstand zum oberen Rand */
         }
 
         /* Login-Container */
         .login-container {
-            background-color: #9f9f9f;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            text-align: center;
-            margin-top: 20px;
+            background-color: #9f9f9f; /* Hintergrundfarbe des Containers */
+            padding: 40px; /* Innenabstand */
+            border-radius: 8px; /* Runde Ecken */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Schatteneffekt */
+            width: 300px; /* Breite des Containers */
+            text-align: center; /* Zentriert den Text */
+            margin-top: 20px; /* Abstand nach oben */
         }
 
-        .login-container h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+            .login-container h1 {
+                font-size: 24px; /* Schriftgröße des Titels */
+                margin-bottom: 20px; /* Abstand nach unten */
+            }
 
-        .login-container label {
-            display: block;
-            text-align: left;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
+            .login-container label {
+                display: block; /* Block-Element, um Platz darunter zu schaffen */
+                text-align: left; /* Text links ausrichten */
+                margin-bottom: 8px; /* Abstand nach unten */
+                font-size: 14px; /* Schriftgröße */
+            }
 
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-        }
+            .login-container input[type="text"],
+            .login-container input[type="password"] {
+                width: 100%; /* Füllt die gesamte Breite des Containers */
+                padding: 10px; /* Innenabstand */
+                margin-bottom: 20px; /* Abstand nach unten */
+                border: none; /* Entfernt die Umrandung */
+                border-radius: 4px; /* Runde Ecken */
+                font-size: 14px; /* Schriftgröße */
+            }
 
-        .login-container button {
-            background-color: #0078D6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-bottom: 20px;
-        }
+            .login-container button {
+                background-color: #0078D6; /* Hintergrundfarbe des Buttons */
+                color: white; /* Textfarbe */
+                padding: 10px 20px; /* Innenabstand */
+                border: none; /* Keine Umrandung */
+                border-radius: 5px; /* Runde Ecken */
+                font-size: 16px; /* Schriftgröße */
+                cursor: pointer; /* Zeigt Hand-Cursor an */
+                transition: background-color 0.3s; /* Übergangseffekt für die Hintergrundfarbe */
+                margin-bottom: 20px; /* Abstand nach unten */
+            }
 
-        .login-container button:hover {
-            background-color: #008DFC;
-        }
+                .login-container button:hover {
+                    background-color: #008DFC; /* Ändert die Hintergrundfarbe bei Hover */
+                }
 
         .alert-error {
-            background-color: #dc3545;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            text-align: center;
+            background-color: #dc3545; /* Hintergrundfarbe für Fehlermeldung */
+            color: white; /* Textfarbe */
+            padding: 10px; /* Innenabstand */
+            border-radius: 5px; /* Runde Ecken */
+            margin-bottom: 20px; /* Abstand nach unten */
+            font-size: 16px; /* Schriftgröße */
+            text-align: center; /* Text zentrieren */
         }
     </style>
 </head>
 <body>
     <div class="login-container">
+        @* Wenn eine Fehlermeldung vorhanden ist, wird sie angezeigt *@
         @if (ViewData["ErrorMessage"] != null)
         {
             <div class="alert-error">
-                @ViewData["ErrorMessage"]
+                @ViewData["ErrorMessage"] // Anzeige der Fehlermeldung
             </div>
         }
-        
-        <h1>Login</h1>
+
+        <h1>Login</h1> <!-- Titel der Seite -->
+        <!-- Login-Formular -->
         <form asp-action="Login" method="post">
             <div>
-                <label asp-for="Email">Email</label>
-                <input asp-for="Email" type="text" />
+                <label asp-for="Email">Email</label> <!-- E-Mail-Label -->
+                <input asp-for="Email" type="text" /> <!-- E-Mail-Eingabefeld -->
             </div>
             <div>
-                <label asp-for="Password">Passwort</label>
-                <input asp-for="Password" type="password" />
+                <label asp-for="Password">Passwort</label> <!-- Passwort-Label -->
+                <input asp-for="Password" type="password" /> <!-- Passwort-Eingabefeld -->
             </div>
             <div>
                 <label>
-                    <input asp-for="RememberMe" type="checkbox" />
+                    <input asp-for="RememberMe" type="checkbox" /> <!-- Checkbox für 'Angemeldet bleiben' -->
                     Angemeldet bleiben
                 </label>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Login</button> <!-- Button zum Absenden des Formulars -->
         </form>
     </div>
 </body>

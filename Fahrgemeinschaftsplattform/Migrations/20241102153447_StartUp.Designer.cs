@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fahrgemeinschaftsplattform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241102135354_UpdateRouteModel")]
-    partial class UpdateRouteModel
+    [Migration("20241102153447_StartUp")]
+    partial class StartUp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,8 +42,12 @@ namespace Fahrgemeinschaftsplattform.Migrations
                     b.Property<DateTime>("GewuenschteAbfahrtszeit")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MitfahrerId")
+                    b.Property<int?>("MitfahrerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("MitfahrerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("StartLatitude")
                         .HasColumnType("float");
@@ -117,8 +121,12 @@ namespace Fahrgemeinschaftsplattform.Migrations
                     b.Property<double>("EndLongitude")
                         .HasColumnType("float");
 
-                    b.Property<int>("FahrerId")
+                    b.Property<int?>("FahrerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FahrerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("StartLatitude")
                         .HasColumnType("float");
@@ -340,24 +348,16 @@ namespace Fahrgemeinschaftsplattform.Migrations
 
             modelBuilder.Entity("Fahrgemeinschaftsplattform.Models.Anfrage", b =>
                 {
-                    b.HasOne("Fahrgemeinschaftsplattform.Models.Mitfahrer", "Mitfahrer")
+                    b.HasOne("Fahrgemeinschaftsplattform.Models.Mitfahrer", null)
                         .WithMany("Anfragen")
-                        .HasForeignKey("MitfahrerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Mitfahrer");
+                        .HasForeignKey("MitfahrerId");
                 });
 
             modelBuilder.Entity("Fahrgemeinschaftsplattform.Models.Route", b =>
                 {
-                    b.HasOne("Fahrgemeinschaftsplattform.Models.Fahrer", "Fahrer")
+                    b.HasOne("Fahrgemeinschaftsplattform.Models.Fahrer", null)
                         .WithMany("Routen")
-                        .HasForeignKey("FahrerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Fahrer");
+                        .HasForeignKey("FahrerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

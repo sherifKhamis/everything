@@ -1,78 +1,77 @@
 /* Allgemeine Stile */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    margin: 0; /* Entfernt Standardabstand von allen Elementen */
+    padding: 0; /* Entfernt Standardinnenabstand von allen Elementen */
+    box-sizing: border-box; /* Ändert das Box-Modell, sodass padding und border zur Breite und Höhe hinzugerechnet werden */
+    font-family: Arial, sans-serif; /* Setzt die Standardschriftart auf Arial oder eine ähnliche serifenlose Schrift */
 }
 
 body {
-    background-color: black;
-    padding-top: 180px;
+    background-color: black; /* Setzt den Hintergrund des Body auf Schwarz */
+    padding-top: 180px; /* Fügt oben im Body einen Abstand hinzu, um Platz für die feste Navbar zu schaffen */
 }
 
 /* Navigation */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px; 
-    background-color: black;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Stellt sicher, dass die Navbar über anderen Elementen liegt */
+    display: flex; /* Aktiviert Flexbox zur Anordnung von Kindern in einer Reihe */
+    justify-content: space-between; /* Verteilt die Kinder der Navbar gleichmäßig mit Platz dazwischen */
+    align-items: center; /* Zentriert die Kinder der Navbar vertikal */
+    padding: 20px 50px; /* Fügt Innenabstand zur Navbar hinzu */
+    background-color: black; /* Setzt den Hintergrund der Navbar auf Schwarz */
+    color: white; /* Setzt die Textfarbe der Navbar auf Weiß */
+    position: fixed; /* Positioniert die Navbar fest am oberen Rand der Seite */
+    top: 0; /* Positioniert die Navbar oben */
+    left: 0; /* Positioniert die Navbar am linken Rand */
+    width: 100%; /* Stellt sicher, dass die Navbar die gesamte Breite des Bildschirms einnimmt */
+    z-index: 1000; /* Sorgt dafür, dass die Navbar über anderen Elementen liegt */
 }
 
-
 .navbar-center {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute; /* Positioniert das Zentrum der Navbar absolut */
+    left: 50%; /* Platziert es horizontal in der Mitte */
+    transform: translateX(-50%); /* Verschiebt es nach links, um die exakte Zentrierung zu erreichen */
 }
 
 .navbar-logo {
-    width: 100px; /* Logo-Breite anpassen */
-    height: auto;
+    width: 100px; /* Setzt die Breite des Logos */
+    height: auto; /* Passt die Höhe proportional an */
 }
 
 .nav-links {
-    list-style-type: none;
-    display: flex;
-    gap: 25px;
-    margin-left: 25px;
-    margin-top: 25px;
+    list-style-type: none; /* Entfernt Aufzählungszeichen */
+    display: flex; /* Aktiviert Flexbox für eine horizontale Anordnung */
+    gap: 25px; /* Setzt Abstand zwischen den Links */
+    margin-left: 25px; /* Fügt links Abstand hinzu */
+    margin-top: 25px; /* Fügt oben Abstand hinzu */
 }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-}
+    .nav-links a {
+        color: white; /* Setzt die Farbe der Links auf Weiß */
+        text-decoration: none; /* Entfernt Unterstreichung der Links */
+    }
 
 .btn {
-    background-color: #0078D6;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    margin-bottom: 80px;
+    background-color: #0078D6; /* Setzt den Hintergrund der Schaltfläche auf Blau */
+    color: white; /* Setzt die Textfarbe auf Weiß */
+    padding: 10px 20px; /* Fügt Innenabstand zur Schaltfläche hinzu */
+    border-radius: 5px; /* Rundet die Ecken der Schaltfläche ab */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    transition: background-color 0.3s; /* Fügt einen Übergangseffekt für die Hintergrundfarbe hinzu */
+    margin-bottom: 50px; /* Fügt unten Abstand hinzu */
 }
 
-.btn:hover {
-    background-color: #008DFC;
-}
+    .btn:hover {
+        background-color: #008DFC; /* Ändert die Hintergrundfarbe der Schaltfläche bei Hover */
+    }
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #9f9f9f;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
+    position: fixed; /* Positioniert die Fußzeile fest am unteren Rand */
+    bottom: 0; /* Positioniert sie am unteren Rand */
+    left: 0; /* Positioniert sie am linken Rand */
+    width: 100%; /* Stellt sicher, dass die Fußzeile die gesamte Breite einnimmt */
+    background-color: #9f9f9f; /* Setzt die Hintergrundfarbe auf Grau */
+    color: white; /* Setzt die Textfarbe auf Weiß */
+    text-align: center; /* Zentriert den Text in der Fußzeile */
+    padding: 20px; /* Fügt Innenabstand hinzu */
+    font-size: 14px; /* Setzt die Schriftgröße */
 }
