@@ -18,8 +18,18 @@
                 <p><strong>Ziel Koordinaten:</strong> @route.EndLatitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture), @route.EndLongitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture)</p> <!-- Zielkoordinaten anzeigen -->
                 <p><strong>Abfahrtszeit:</strong> @route.Abfahrtszeit.ToString("dd.MM.yyyy HH:mm")</p> <!-- Formatierte Abfahrtszeit anzeigen -->
                 <p><strong>Verfügbare Plätze:</strong> @route.VerfuegbareSitze</p> <!-- Verfügbare Sitzplätze anzeigen -->
-                <!-- Button zum Anzeigen der Karte -->
+
+                <!-- Button zur Anzeige der Karte -->
                 <button class="btn" onclick="showRouteMap(@route.StartLatitude, @route.StartLongitude, @route.EndLatitude, @route.EndLongitude)">Karte anzeigen</button>
+
+                <!-- Button zur Anzeige der CO₂-Ersparnis -->
+                <button class="btn" onclick="toggleCo2Savings(@route.StartLatitude, @route.StartLongitude, @route.EndLatitude, @route.EndLongitude, @route.VerfuegbareSitze)">CO₂-Ersparnis anzeigen</button>
+
+                <!-- Abschnitt für die CO₂-Ersparnis, zunächst ausgeblendet -->
+                <div id="co2-savings-@route.StartLatitude-@route.StartLongitude" class="co2-savings" style="display: none;">
+                    <p id="savings-text-@route.StartLatitude-@route.StartLongitude"></p>
+                    <canvas id="co2Chart-@route.StartLatitude-@route.StartLongitude" width="200" height="100"></canvas>
+                </div>
             </div>
         }
     </div>
@@ -37,49 +47,48 @@ else
     </div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=@googleMapsApiKey&callback=initMap" async defer></script>
+
 <script>
     let map;
     let directionsService;
     let directionsRenderer;
 
     function initMap() {
-        directionsService = new google.maps.DirectionsService();
-        directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
 
-        // Initialisiere die Karte im Modal, aber ohne Koordinaten
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 51.1657, lng: 10.4515 },
-            zoom: 6,
-            styles: [
-                { elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
-                { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
-                { elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
-                { elementType: "labels.text.stroke", stylers: [{ color: "#f5f5f5" }] },
-                { featureType: "administrative.land_parcel", elementType: "labels.text.fill", stylers: [{ color: "#bdbdbd" }] },
-                { featureType: "poi", elementType: "geometry", stylers: [{ color: "#eeeeee" }] },
-                { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
-                { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] },
-                { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] },
-                { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
-                { featureType: "road.arterial", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
-                { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#dadada" }] },
-                { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
-                { featureType: "road.local", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] },
-                { featureType: "transit.line", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] },
-                { featureType: "water", elementType: "geometry", stylers: [{ color: "#c9c9c9" }] },
-                { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] }
-            ]
-        });
+    // Initialisiere die Karte im Modal mit einem monochromen Stil
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 51.1657, lng: 10.4515 },
+        zoom: 6,
+        styles: [
+            { elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
+            { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#f5f5f5" }] },
+            { featureType: "administrative.land_parcel", elementType: "labels.text.fill", stylers: [{ color: "#bdbdbd" }] },
+            { featureType: "poi", elementType: "geometry", stylers: [{ color: "#eeeeee" }] },
+            { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+            { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] },
+            { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] },
+            { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+            { featureType: "road.arterial", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+            { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#dadada" }] },
+            { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
+            { featureType: "road.local", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] },
+            { featureType: "transit.line", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] },
+            { featureType: "water", elementType: "geometry", stylers: [{ color: "#c9c9c9" }] },
+            { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] }
+        ]
+    });
 
-        directionsRenderer.setMap(map);
-    }
+    directionsRenderer.setMap(map);
+}
 
     function showRouteMap(startLat, startLng, endLat, endLng) {
-        // Öffnet das Modal
+        // Öffnet das Modal und zeigt die Karte an
         document.getElementById("mapModal").style.display = "block";
 
-        // Berechnet und zeigt die Route
         directionsService.route(
             {
                 origin: { lat: startLat, lng: startLng },
@@ -97,85 +106,84 @@ else
     }
 
     function closeMapModal() {
-        // Schließt das Modal
         document.getElementById("mapModal").style.display = "none";
+    }
+
+    function toggleCo2Savings(startLat, startLng, endLat, endLng, seats) {
+    const savingsDivId = `co2-savings-${startLat}-${startLng}`;
+    const savingsDiv = document.getElementById(savingsDivId);
+
+    if (savingsDiv.style.display === "none") {
+        const distance = calculateDistance(startLat, startLng, endLat, endLng); 
+        const emissionsPerKm = 120; // CO₂-Ausstoß in g/km
+        const co2Alone = distance * emissionsPerKm;
+        const co2Carpool = co2Alone / seats;
+        const co2Savings = co2Alone - co2Carpool;
+
+        const savingsTextId = `savings-text-${startLat}-${startLng}`;
+        document.getElementById(savingsTextId).innerText = `CO₂-Ersparnis: ${co2Savings.toFixed(2)}g`;
+
+        const chartId = `co2Chart-${startLat}-${startLng}`;
+        const ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Alleine fahren', 'Fahrgemeinschaft'],
+                datasets: [{
+                    label: 'CO₂ (g)',
+                    data: [co2Alone, co2Carpool],
+                    backgroundColor: ['#007bff', '#007bff'], // Grauer Ton und Blauton
+                    borderColor: ['#007bff', '#007bff'], // Leichte Umrandung in den entsprechenden Farben
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'CO₂-Ausstoß (g)'
+                        }
+                    }
+                }
+            }
+        });
+
+        savingsDiv.style.display = "block";
+    } else {
+        savingsDiv.style.display = "none";
+    }
+}
+
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; 
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2); 
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        return R * c;
     }
 </script>
 
+<!-- JavaScript für die Google Maps API und die CO₂-Berechnung -->
+<script src="https://maps.googleapis.com/maps/api/js?key=@googleMapsApiKey&callback=initMap" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Einbindung der Chart.js-Bibliothek -->
+
 <style>
-    p 
-    {
-        margin: 20px;
-    }
-
-
-
-    .routes-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .route-card {
-        background-color: #9f9f9f;
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        width: 300px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-top: 10px;
-        font-size: 16px;
-        color: white;
-        background-color: #007bff;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-        cursor: pointer;
-    }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 700px;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-        .close:hover, .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    p { margin: 20px; }
+    .routes-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
+    .route-card { background-color: #9f9f9f; color: white; padding: 20px; border-radius: 8px; width: 300px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; }
+    .btn { display: inline-block; padding: 10px 20px; margin-top: 10px; font-size: 16px; color: white; background-color: #007bff; border-radius: 5px; transition: background-color 0.3s; cursor: pointer; }
+    .btn:hover { background-color: #0056b3; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.5); }
+    .modal-content { background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 700px; }
+    .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
+    .co2-savings { margin-top: 20px; background-color: #9f9f9f; padding: 10px; border-radius: 8px; text-align: center; }
 </style>
