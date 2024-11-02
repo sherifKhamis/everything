@@ -3,8 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using Fahrgemeinschaftsplattform.Data;
 using Fahrgemeinschaftsplattform.Models;
 using Fahrgemeinschaftsplattform.Services;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var cultureInfo = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 // Dienste hinzufügen
 
@@ -34,6 +39,8 @@ builder.Services.AddScoped<CarpoolService>();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication();
 builder.Services.AddControllers();
+
+builder.Services.AddSingleton<RouteService>();
 
 var app = builder.Build();
 

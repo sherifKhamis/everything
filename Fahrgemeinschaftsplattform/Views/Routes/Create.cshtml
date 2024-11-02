@@ -29,24 +29,24 @@
             <!-- Startort Koordinaten (Latitude und Longitude) -->
             <div class="form-group">
                 <label asp-for="StartLatitude">Start Latitude</label>
-                <input asp-for="StartLatitude" class="form-control" required />
+                <input asp-for="StartLatitude" class="form-control" step="any" required />
                 <span asp-validation-for="StartLatitude" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StartLongitude">Start Longitude</label>
-                <input asp-for="StartLongitude" class="form-control" required />
+                <input asp-for="StartLongitude" class="form-control" step="any" required />
                 <span asp-validation-for="StartLongitude" class="text-danger"></span>
             </div>
 
             <!-- Zielort Koordinaten (Latitude und Longitude) -->
             <div class="form-group">
                 <label asp-for="EndLatitude">End Latitude</label>
-                <input asp-for="EndLatitude" class="form-control" required />
+                <input asp-for="EndLatitude" class="form-control" step="any" required />
                 <span asp-validation-for="EndLatitude" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndLongitude">End Longitude</label>
-                <input asp-for="EndLongitude" class="form-control" required />
+                <input asp-for="EndLongitude" class="form-control" step="any" required />
                 <span asp-validation-for="EndLongitude" class="text-danger"></span>
             </div>
 

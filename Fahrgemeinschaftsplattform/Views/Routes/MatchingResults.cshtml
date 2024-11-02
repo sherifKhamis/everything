@@ -2,77 +2,180 @@
 
 @{
     Layout = "_Layout"; // Legt das Layout der Seite fest
+    var googleMapsApiKey = Environment.GetEnvironmentVariable("GoogleMapsApiKey");
 }
 
-<h2 style="text-align: center; margin-top: 20px; color: #333;">Passende Fahrten</h2> <!-- Überschrift der Seite -->
-<!-- Überprüfung, ob das Model Fahrten enthält -->
+<h2 style="text-align: center; margin-top: 20px; color: white;">Passende Fahrten</h2> <!-- Überschrift der Seite -->
 @if (Model.Any())
 {
     <div class="routes-container">
-        <!-- Schleife durch alle passenden Fahrten und zeigt sie als Karten an -->
         @foreach (var route in Model)
         {
             <div class="route-card">
                 <h3>Fahrt von Start zu Ziel</h3> <!-- Titel der Fahrt -->
                 <p><strong>Fahrername:</strong> @route.FahrerName</p> <!-- Fahrername anzeigen -->
-                <p><strong>Start Koordinaten:</strong> @route.StartLatitude, @route.StartLongitude</p> <!-- Startkoordinaten anzeigen -->
-                <p><strong>Ziel Koordinaten:</strong> @route.EndLatitude, @route.EndLongitude</p> <!-- Zielkoordinaten anzeigen -->
+                <p><strong>Start Koordinaten:</strong> @route.StartLatitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture), @route.StartLongitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture)</p> <!-- Startkoordinaten anzeigen -->
+                <p><strong>Ziel Koordinaten:</strong> @route.EndLatitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture), @route.EndLongitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture)</p> <!-- Zielkoordinaten anzeigen -->
                 <p><strong>Abfahrtszeit:</strong> @route.Abfahrtszeit.ToString("dd.MM.yyyy HH:mm")</p> <!-- Formatierte Abfahrtszeit anzeigen -->
                 <p><strong>Verfügbare Plätze:</strong> @route.VerfuegbareSitze</p> <!-- Verfügbare Sitzplätze anzeigen -->
+                <!-- Button zum Anzeigen der Karte -->
+                <button class="btn" onclick="showRouteMap(@route.StartLatitude, @route.StartLongitude, @route.EndLatitude, @route.EndLongitude)">Karte anzeigen</button>
             </div>
         }
     </div>
 }
 else
 {
-    <!-- Nachricht anzeigen, wenn keine passenden Fahrten gefunden wurden -->
     <p style="text-align: center; color: #777; margin-top: 20px;">Keine passenden Fahrten gefunden.</p>
 }
 
+<!-- Modal für die Karte -->
+<div id="mapModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeMapModal()">&times;</span>
+        <div id="map" style="height: 500px; width: 100%;"></div>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=@googleMapsApiKey&callback=initMap" async defer></script>
+<script>
+    let map;
+    let directionsService;
+    let directionsRenderer;
+
+    function initMap() {
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+
+        // Initialisiere die Karte im Modal, aber ohne Koordinaten
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 51.1657, lng: 10.4515 },
+            zoom: 6,
+            styles: [
+                { elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
+                { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+                { elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#f5f5f5" }] },
+                { featureType: "administrative.land_parcel", elementType: "labels.text.fill", stylers: [{ color: "#bdbdbd" }] },
+                { featureType: "poi", elementType: "geometry", stylers: [{ color: "#eeeeee" }] },
+                { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+                { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] },
+                { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] },
+                { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+                { featureType: "road.arterial", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+                { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#dadada" }] },
+                { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
+                { featureType: "road.local", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] },
+                { featureType: "transit.line", elementType: "geometry", stylers: [{ color: "#e5e5e5" }] },
+                { featureType: "water", elementType: "geometry", stylers: [{ color: "#c9c9c9" }] },
+                { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] }
+            ]
+        });
+
+        directionsRenderer.setMap(map);
+    }
+
+    function showRouteMap(startLat, startLng, endLat, endLng) {
+        // Öffnet das Modal
+        document.getElementById("mapModal").style.display = "block";
+
+        // Berechnet und zeigt die Route
+        directionsService.route(
+            {
+                origin: { lat: startLat, lng: startLng },
+                destination: { lat: endLat, lng: endLng },
+                travelMode: google.maps.TravelMode.DRIVING
+            },
+            (result, status) => {
+                if (status === "OK") {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    alert("Routenberechnung fehlgeschlagen: " + status);
+                }
+            }
+        );
+    }
+
+    function closeMapModal() {
+        // Schließt das Modal
+        document.getElementById("mapModal").style.display = "none";
+    }
+</script>
+
 <style>
-    /* Container für die Fahrtenübersicht */
+    p 
+    {
+        margin: 20px;
+    }
+
+
+
     .routes-container {
         display: flex;
-        flex-wrap: wrap; /* Zeilenumbruch bei Platzmangel */
-        gap: 20px; /* Abstand zwischen den Karten */
-        justify-content: center; /* Zentriert die Karten */
-        padding: 20px; /* Innenabstand */
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
     }
 
     .route-card {
-        background-color: #9f9f9f; /* Hintergrundfarbe der Karte */
-        color: white; /* Textfarbe */
-        padding: 20px; /* Innenabstand */
-        border-radius: 8px; /* Runde Ecken */
-        width: 300px; /* Breite der Karte */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatteneffekt */
-        text-align: center; /* Textzentrierung */
+        background-color: #9f9f9f;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
     }
-
-        .route-card h3 {
-            font-size: 24px; /* Schriftgröße des Titels */
-            margin-bottom: 10px; /* Abstand nach unten */
-        }
-
-        .route-card p {
-            font-size: 16px; /* Schriftgröße des Textes */
-            margin: 5px 0; /* Abstand zwischen den Absätzen */
-        }
 
     .btn {
         display: inline-block;
-        padding: 10px 20px; /* Innenabstand */
-        margin-top: 10px; /* Abstand nach oben */
-        font-size: 16px; /* Schriftgröße */
-        text-decoration: none; /* Entfernt Unterstreichung */
-        color: white; /* Textfarbe */
-        background-color: #007bff; /* Hintergrundfarbe */
-        border-radius: 5px; /* Runde Ecken */
-        transition: background-color 0.3s; /* Übergangseffekt für Hintergrundfarbe */
-        cursor: pointer; /* Zeigt Hand-Cursor an */
+        padding: 10px 20px;
+        margin-top: 10px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        cursor: pointer;
     }
 
         .btn:hover {
-            background-color: #0056b3; /* Ändert die Hintergrundfarbe bei Hover */
+            background-color: #0056b3;
+        }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
 </style>

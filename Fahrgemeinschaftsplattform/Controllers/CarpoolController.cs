@@ -9,11 +9,13 @@ namespace Fahrgemeinschaftsplattform.Controllers
     public class CarpoolController : Controller
     {
         private readonly CarpoolService _carpoolService; // Instanz des CarpoolService zur Verarbeitung von Logik für Fahrten
+        private readonly RouteService _routeService; // Instanz des RouteService zur Verarbeitung von Routen
 
-        // Konstruktor zur Injektion des CarpoolService
-        public CarpoolController(CarpoolService carpoolService)
+        // Konstruktor zur Injektion von CarpoolService und RouteService
+        public CarpoolController(CarpoolService carpoolService, RouteService routeService)
         {
             _carpoolService = carpoolService;
+            _routeService = routeService;
         }
 
         // GET-Methode zum Suchen einer passenden Fahrt
@@ -21,10 +23,20 @@ namespace Fahrgemeinschaftsplattform.Controllers
         public async Task<IActionResult> FindRide(double startLat, double startLon, double endLat, double endLon, DateTime requestedDeparture)
         {
             // Aufrufen des CarpoolService, um passende Fahrten zu finden
-            var matches = await _carpoolService.FindMatchingRides(startLat, startLon, endLat, endLon, requestedDeparture, 100, 60);
+            var matches = await _carpoolService.FindMatchingRides(startLat, startLon, endLat, endLon, requestedDeparture, 1000, 60);
 
             // Rückgabe der gefundenen Ergebnisse an eine View zur Anzeige
             return View(matches);
         }
+
+        // GET-Methode zum Abrufen einer Route
+        [HttpGet("GetRoute")]
+        public async Task<IActionResult> GetRoute(string origin, string destination)
+        {
+            var routeData = await _routeService.GetRouteAsync(origin, destination);
+            return Content(routeData);
+        }
+
+
     }
 }

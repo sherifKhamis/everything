@@ -21,8 +21,8 @@
         <div class="route-card">
             <h3>Fahrt von Start zu Ziel</h3> <!-- Titel der Fahrt -->
             <p><strong>Fahrer:</strong> @route.FahrerName</p> <!-- Fahrername anzeigen -->
-            <p><strong>Start Koordinaten:</strong> @route.StartLatitude, @route.StartLongitude</p> <!-- Startkoordinaten anzeigen -->
-            <p><strong>Ziel Koordinaten:</strong> @route.EndLatitude, @route.EndLongitude</p> <!-- Zielkoordinaten anzeigen -->
+            <p><strong>Start Koordinaten:</strong> @route.StartLatitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture), @route.StartLongitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture)</p> <!-- Startkoordinaten anzeigen -->
+            <p><strong>Ziel Koordinaten:</strong> @route.EndLatitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture), @route.EndLongitude.ToString("F6", System.Globalization.CultureInfo.InvariantCulture)</p> <!-- Zielkoordinaten anzeigen -->
             <p><strong>Abfahrtszeit:</strong> @route.Abfahrtszeit.ToString("dd.MM.yyyy HH:mm")</p> <!-- Formatierte Abfahrtszeit anzeigen -->
             <p><strong>Verfügbare Plätze:</strong> @route.VerfuegbareSitze</p> <!-- Verfügbare Sitzplätze anzeigen -->
         </div>
