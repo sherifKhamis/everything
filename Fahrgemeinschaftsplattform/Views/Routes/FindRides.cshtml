@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<h2 style="text-align: center; margin-top: 20px; color: #333;">Passende Fahrten finden</h2>
+
+<div class="find-rides-container">
+    <div class="route-card">
+        <form asp-action="FindRides" method="post">
+            <div class="form-group">
+                <label for="startLat">Start Latitude</label>
+                <input type="text" class="form-control" id="startLat" name="startLat" required>
+            </div>
+            <div class="form-group">
+                <label for="startLon">Start Longitude</label>
+                <input type="text" class="form-control" id="startLon" name="startLon" required>
+            </div>
+            <div class="form-group">
+                <label for="endLat">End Latitude</label>
+                <input type="text" class="form-control" id="endLat" name="endLat" required>
+            </div>
+            <div class="form-group">
+                <label for="endLon">End Longitude</label>
+                <input type="text" class="form-control" id="endLon" name="endLon" required>
+            </div>
+            <div class="form-group">
+                <label for="requestedDeparture">Gewünschte Abfahrtszeit</label>
+                <input type="datetime-local" class="form-control" id="requestedDeparture" name="requestedDeparture" required>
+            </div>
+            <button type="submit" class="btn">Passende Fahrten finden</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Container und Karten-Stile */
+    .find-rides-container {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .route-card {
+        background-color: #9f9f9f;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>

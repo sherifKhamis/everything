@@ -1,1 +1,80 @@
-[]
+[
+  {
+    "ContainingType": "Fahrgemeinschaftsplattform.Controllers.CarpoolApiController",
+    "Method": "GetAllRoutes",
+    "RelativePath": "api/CarpoolApi/all-routes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Fahrgemeinschaftsplattform.Controllers.CarpoolApiController",
+    "Method": "CreateRequest",
+    "RelativePath": "api/CarpoolApi/create-request",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Fahrgemeinschaftsplattform.Models.Anfrage",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Fahrgemeinschaftsplattform.Controllers.CarpoolApiController",
+    "Method": "CreateRoute",
+    "RelativePath": "api/CarpoolApi/create-route",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "route",
+        "Type": "Fahrgemeinschaftsplattform.Models.Route",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Fahrgemeinschaftsplattform.Controllers.CarpoolApiController",
+    "Method": "FindMatchingRides",
+    "RelativePath": "api/CarpoolApi/find-matching-rides",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "startLat",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "startLon",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "endLat",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "endLon",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "requestedDeparture",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

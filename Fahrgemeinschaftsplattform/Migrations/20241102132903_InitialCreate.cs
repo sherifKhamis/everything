@@ -30,6 +30,7 @@ namespace Fahrgemeinschaftsplattform.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -48,6 +49,34 @@ namespace Fahrgemeinschaftsplattform.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fahrer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Kontakt = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fahrer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Mitfahrer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Kontakt = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mitfahrer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +185,62 @@ namespace Fahrgemeinschaftsplattform.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Routen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartLatitude = table.Column<double>(type: "float", nullable: false),
+                    StartLongitude = table.Column<double>(type: "float", nullable: false),
+                    EndLatitude = table.Column<double>(type: "float", nullable: false),
+                    EndLongitude = table.Column<double>(type: "float", nullable: false),
+                    Abfahrtszeit = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VerfuegbareSitze = table.Column<int>(type: "int", nullable: false),
+                    FahrerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FahrerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Routen", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Routen_Fahrer_FahrerId",
+                        column: x => x.FahrerId,
+                        principalTable: "Fahrer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Anfragen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartLatitude = table.Column<double>(type: "float", nullable: false),
+                    StartLongitude = table.Column<double>(type: "float", nullable: false),
+                    EndLatitude = table.Column<double>(type: "float", nullable: false),
+                    EndLongitude = table.Column<double>(type: "float", nullable: false),
+                    GewuenschteAbfahrtszeit = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MitfahrerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MitfahrerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Anfragen", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Anfragen_Mitfahrer_MitfahrerId",
+                        column: x => x.MitfahrerId,
+                        principalTable: "Mitfahrer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Anfragen_MitfahrerId",
+                table: "Anfragen",
+                column: "MitfahrerId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,11 +279,19 @@ namespace Fahrgemeinschaftsplattform.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Routen_FahrerId",
+                table: "Routen",
+                column: "FahrerId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Anfragen");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -215,10 +308,19 @@ namespace Fahrgemeinschaftsplattform.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Routen");
+
+            migrationBuilder.DropTable(
+                name: "Mitfahrer");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Fahrer");
         }
     }
 }

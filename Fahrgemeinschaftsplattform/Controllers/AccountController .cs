@@ -7,10 +7,10 @@ namespace Fahrgemeinschaftsplattform.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -24,7 +24,7 @@ namespace Fahrgemeinschaftsplattform.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.Email, Email = model.Email, Name = model.Name};
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -50,23 +50,35 @@ namespace Fahrgemeinschaftsplattform.Controllers
         public IActionResult Login() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToLocal(returnUrl);
                 }
-
-                // Fehlermeldung setzen, wenn der Login fehlschlägt
-                ViewData["ErrorMessage"] = "Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.";
+                
             }
-
             return View(model);
         }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Routes");
+            }
+        }
+
 
 
         [HttpPost]

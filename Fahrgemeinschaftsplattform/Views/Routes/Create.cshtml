@@ -1,0 +1,122 @@
+﻿@model Fahrgemeinschaftsplattform.Models.Route
+
+@{
+    Layout = "_Layout";
+}
+
+<h2 style="text-align: center; margin-top: 20px; color: #333;">Neue Fahrt erstellen</h2>
+
+<div class="create-route-container">
+    <div class="route-card">
+        <!-- Anzeige der Fehlermeldung -->
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                <strong>Fehler:</strong>
+                <div asp-validation-summary="All"></div>
+            </div>
+        }
+
+        <form asp-action="Create" method="post">
+            <!-- Fahrer -->
+            <div class="form-group">
+                <label for="FahrerName">Fahrer</label>
+                <input type="text" class="form-control" id="FahrerName" name="FahrerName" required>
+            </div>
+
+            <!-- Startort Koordinaten -->
+            <div class="form-group">
+                <label for="StartLatitude">Start Latitude</label>
+                <input type="text" class="form-control" id="StartLatitude" name="StartLatitude" required>
+            </div>
+            <div class="form-group">
+                <label for="StartLongitude">Start Longitude</label>
+                <input type="text" class="form-control" id="StartLongitude" name="StartLongitude" required>
+            </div>
+
+            <!-- Zielort Koordinaten -->
+            <div class="form-group">
+                <label for="EndLatitude">End Latitude</label>
+                <input type="text" class="form-control" id="EndLatitude" name="EndLatitude" required>
+            </div>
+            <div class="form-group">
+                <label for="EndLongitude">End Longitude</label>
+                <input type="text" class="form-control" id="EndLongitude" name="EndLongitude" required>
+            </div>
+
+            <!-- Abfahrtszeit und verfügbare Plätze -->
+            <div class="form-group">
+                <label for="Abfahrtszeit">Abfahrtszeit</label>
+                <input type="datetime-local" class="form-control" id="Abfahrtszeit" name="Abfahrtszeit" required>
+            </div>
+            <div class="form-group">
+                <label for="VerfuegbareSitze">Verfügbare Plätze</label>
+                <input type="number" class="form-control" id="VerfuegbareSitze" name="VerfuegbareSitze" min="1" required>
+            </div>
+            <button type="submit" class="btn">Fahrt erstellen</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Container und Karten-Stile */
+    .create-route-container {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .route-card {
+        background-color: #9f9f9f;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .alert {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+        .alert strong {
+            font-weight: bold;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+</style>
