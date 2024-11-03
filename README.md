@@ -10,9 +10,9 @@ Herzlich willkommen in diesem Repository! Hier findet ihr eine Sammlung meiner P
 
 Das **AlertingJob**-Script wurde während meiner Zeit bei der ITD/OE Versetzungsstelle entwickelt. Es dient dazu, das **DevOps-Team von WARP** automatisch über bald ablaufende **Azure App Registrations** und **Key Vault Secrets** zu benachrichtigen. Dadurch werden potenzielle Sicherheitsrisiken frühzeitig erkannt und das Team kann rechtzeitig reagieren, um reibungslose Betriebsabläufe sicherzustellen.
 
-### 2. SensorCar-GUI
+### 2. SensoCar-GUI
 
-**SensorCar-GUI** wurde in meinem ersten Berufsschuljahr entwickelt und ist eine grafische Benutzeroberfläche, die Sensordaten visualisiert und analysiert. Dieses Projekt war eine wertvolle Einführung in die GUI-Programmierung und das Arbeiten mit Hardware-Schnittstellen und Sensorik.
+**SensoCar-GUI** wurde in meinem ersten Berufsschuljahr entwickelt und ist eine grafische Benutzeroberfläche, die Sensordaten visualisiert und analysiert. Dieses Projekt war eine wertvolle Einführung in die GUI-Programmierung und das Arbeiten mit Hardware-Schnittstellen und Sensorik.
 
 ### 3. Fahrgemeinschaftsplattform
 
